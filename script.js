@@ -9,9 +9,16 @@ function runConversion(fromUnit, toUnit, amount, history = []) {
     return ConversionFunctions[fromUnit][toUnit](amount);
   }
   // try to runConversion with every possible conversion
-  for (let [conversion, conversionFunction] of Object.entries(ConversionFunctions[fromUnit])) {
+  for (let [conversion, conversionFunction] of Object.entries(
+    ConversionFunctions[fromUnit]
+  )) {
     if (!history.includes(conversion)) {
-      let result = runConversion(conversion, toUnit, conversionFunction(amount), history.concat([fromUnit]));
+      let result = runConversion(
+        conversion,
+        toUnit,
+        conversionFunction(amount),
+        history.concat([fromUnit])
+      );
       if (result !== null) {
         return result;
       }
@@ -24,8 +31,10 @@ const liveConversionInput = document.getElementById("live-conversion-input");
 
 function showConversion(fromUnit, toUnit) {
   document.getElementById("live-conversion").style.display = "block";
-  document.getElementById("from-unit").textContent = SpecialPlurals[fromUnit] || fromUnit + "s";
-  document.getElementById("to-unit").textContent = SpecialPlurals[toUnit] || toUnit + "s";
+  document.getElementById("from-unit").textContent =
+    SpecialPlurals[fromUnit] || fromUnit + "s";
+  document.getElementById("to-unit").textContent =
+    SpecialPlurals[toUnit] || toUnit + "s";
 
   function updateConversion() {
     let num = parseFloat(this.value);
@@ -37,7 +46,8 @@ function showConversion(fromUnit, toUnit) {
       if (conversionResult === 0) {
         writtenResult = "0";
       }
-      document.getElementById("after-conversion").textContent = writtenResult || "not convertable to";
+      document.getElementById("after-conversion").textContent =
+        writtenResult || "not convertable to";
     }
   }
   updateConversion.call(liveConversionInput);
@@ -56,7 +66,7 @@ function generateConversions(units) {
           if (unit2Clone.type === "answer") {
             // add a function to show the actual conversion
             unit2Clone.nextFunction = () => {
-              showConversion(unitClone.text, unit2Clone.text)
+              showConversion(unitClone.text, unit2Clone.text);
             };
           }
           return unit2Clone;
@@ -68,7 +78,8 @@ function generateConversions(units) {
 }
 
 const QuestionTree = {
-  "What is measured?": [{
+  "What is measured?": [
+    {
       type: "answer",
       text: "Length",
       nextQuestion: {

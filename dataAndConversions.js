@@ -275,7 +275,7 @@ const ConversionFunctions = {
   // metric volume
   milliliter: {
     liter: milliliters => milliliters / 1000,
-    gallon: milliliters => milliliters / 4546.09
+    gallon: milliliters => milliliters / 3785.41
   },
   liter: {
     milliliter: liters => liters * 1000,
@@ -286,7 +286,7 @@ const ConversionFunctions = {
   },
   // imperial volume
   gallon: {
-    milliliter: gallons => gallons * 4546.09
+    milliliter: gallons => gallons * 3785.41
   }
 };
 
