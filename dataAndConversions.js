@@ -1,4 +1,5 @@
-const LengthUnits = [{
+const LengthUnits = [
+  {
     type: "category",
     text: "Metric:"
   },
@@ -44,7 +45,8 @@ const LengthUnits = [{
   }
 ];
 
-const TemperatureUnits = [{
+const TemperatureUnits = [
+  {
     type: "answer",
     text: "celsius"
   },
@@ -54,11 +56,12 @@ const TemperatureUnits = [{
   },
   {
     type: "answer",
-    text: "farenheit"
+    text: "fahrenheit"
   }
 ];
 
-const SpeedUnits = [{
+const SpeedUnits = [
+  {
     type: "answer",
     text: "kph"
   },
@@ -72,7 +75,8 @@ const SpeedUnits = [{
   }
 ];
 
-const TimeUnits = [{
+const TimeUnits = [
+  {
     type: "answer",
     text: "millisecond"
   },
@@ -98,7 +102,8 @@ const TimeUnits = [{
   }
 ];
 
-const MassUnits = [{
+const MassUnits = [
+  {
     type: "category",
     text: "Metric:"
   },
@@ -132,7 +137,8 @@ const MassUnits = [{
   }
 ];
 
-const VolumeUnits = [{
+const VolumeUnits = [
+  {
     type: "category",
     text: "Metric:"
   },
@@ -203,10 +209,10 @@ const ConversionFunctions = {
   },
   kelvin: {
     celsius: kelvin => kelvin - 273.15,
-    farenheit: kelvin => 1.8 * (kelvin - 273.15) + 32
+    fahrenheit: kelvin => 1.8 * (kelvin - 273.15) + 32
   },
-  farenheit: {
-    kelvin: farenheit => (farenheit - 32) * 1.8 + 273.15
+  fahrenheit: {
+    kelvin: fahrenheit => ((fahrenheit - 32) * 5) / 9 + 273.15
   },
   // speed
   kph: {
@@ -289,5 +295,5 @@ const SpecialPlurals = {
   "length of a football field": "times the length of a football field",
   celsius: "degrees celsius",
   kelvin: "degrees kelvin",
-  farenheit: "degrees farenheit"
+  fahrenheit: "degrees  fahrenheit"
 };
