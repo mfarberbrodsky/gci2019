@@ -1,0 +1,7 @@
+km m 1000
+m cm 100
+m km 0.001
+mm cm 0.1
+inch cm 2.54
+mile km 1.60934
+gallon liter 3.78541
