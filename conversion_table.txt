@@ -1,7 +1,13 @@
 km m 1000
 m cm 100
-m km 0.001
-mm cm 0.1
+cm mm 10
 inch cm 2.54
-mile km 1.60934
-gallon liter 3.78541
+liter quart 1.05669
+gallon quart 4
+kg g 1000
+g mg 1000
+pound g 453.59237
+pound ounce 16
+ton pound 2000
+amp coulomb/s 1
+joule coulomb*volt 1

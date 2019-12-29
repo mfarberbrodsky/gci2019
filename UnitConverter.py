@@ -31,10 +31,10 @@ def table_to_graph(table_path):
     return graph
 
 
-def find_path(graph, src_unit, dst_unit):
+def find_unit_ratio(graph, src_unit, dst_unit):
     """Find a path between two units in the graph (using BFS), and return the total ratio"""
     if src_unit == dst_unit:
-        return [src_unit]
+        return 1
 
     if src_unit not in graph:
         return None
@@ -57,10 +57,26 @@ def find_path(graph, src_unit, dst_unit):
     return None  # In case no path was found
 
 
+def convert(graph, src_unit, dst_unit, value):
+    # First, try simple conversion
+    simple_ratio = find_unit_ratio(graph, src_unit, dst_unit)
+    if simple_ratio:
+        return value * simple_ratio
+
+    # If that doesn't work, try seeing if the units are complex (combinations of different units)
+    for op, op_func in [("*", (lambda x, y: x * y)), ("/", (lambda x, y: x / y))]:
+        if op in src_unit and op in dst_unit:
+            src_unit1, src_unit2 = src_unit.split(op)
+            dst_unit1, dst_unit2 = dst_unit.split(op)
+            r1, r2 = find_unit_ratio(graph, src_unit1, dst_unit1), find_unit_ratio(graph, src_unit2, dst_unit2)
+            if r1 and r2:
+                return value * op_func(r1, r2)
+
+
 graph = table_to_graph(args.table)
-path_ratio = find_path(graph, args.src_unit, args.dst_unit)
-if path_ratio:
-    print("{} {} is {} {}".format(args.value, args.src_unit, args.value * path_ratio, args.dst_unit))
+
+converted_value = convert(graph, args.src_unit, args.dst_unit, args.value)
+if converted_value:
+    print("{} {} is {} {}".format(args.value, args.src_unit, converted_value, args.dst_unit))
 else:
-    print("Impossible to convert between {} and {} using the given conversion table.".format(args.src_unit,
-                                                                                             args.dst_unit))
+    print("Impossible to convert from {} to {} using the given conversion table.".format(args.src_unit, args.dst_unit))
